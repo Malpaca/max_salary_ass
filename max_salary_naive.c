@@ -1,7 +1,5 @@
 #include "max_salary.h"
 
-int * best_arr;
-
 void print_array(int *arr, int size){
   for (int i=0; i<size; i++){
     printf("%d ",arr[i]);
@@ -9,36 +7,43 @@ void print_array(int *arr, int size){
   printf("\n");
 }
 
-// Generating permutation using Heap Algorithm 
-void heap_permutation(int a[], int size, int n) 
-{ 
-    // if size becomes 1 then do something with the obtained permutation   
-    if (size == 1) 
-    { 
+// Generating permutation using Heap Algorithm
+void max_salary_naive(int a[], int size, int n, int * max)
+{
+    // if size becomes 1 then do something with the obtained permutation
+    if (size == 1)
+    {
         //TO DO - instead of printing, insert your code for evaluating the next candidate array
-        print_array(a, n); 
-        return; 
-    } 
-  
-    for (int i=0; i<size; i++) 
-    { 
-        heap_permutation(a,size-1,n); 
-  
-        // if size is odd, swap first and last element 
+        int salary = a[0];
+        for (int i = 1; i < n; i++){
+          salary = concatenate(salary,a[i]);
+        }
+        // print_array(a, n);
+        if (salary > *max) *max = salary;
+        return;
+    }
+
+    for (int i=0; i<size; i++)
+    {
+        max_salary_naive(a,size-1,n, max);
+
+        // if size is odd, swap first and last element
         if (size%2==1) {
-            SWAP(a[0], a[size-1]); 
+            SWAP(a[0], a[size-1]);
 		}
-        // If size is even, swap ith and last element 
+        // If size is even, swap ith and last element
         else{
             SWAP(a[i], a[size-1]);
-		}			
-    } 
-} 
-  
+		}
+    }
+}
+
 // Code to test permutations
-int main() { 
-    int a[] = {1, 2, 3, 4}; 
-    int n = sizeof a/sizeof a[0]; 
-    heap_permutation(a, n, n); 
-    return 0; 
-} 
+// int main() {
+//     int a[] = {1, 2, 3, 4};
+//     int n = sizeof a/sizeof a[0];
+//     int result = 0;
+//     max_salary_naive(a, n, n, &result);
+//     printf("%d\n",result);
+//     return 0;
+// }
