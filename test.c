@@ -93,8 +93,8 @@ int main(int argc, char **argv ){
 
   if (mode == 1){
     int N = atoi(argv[2]);
-    if (N > 18){
-      printf("This exceed max data size, please use array length under 19\n");
+    if (N > 10){
+      printf("This exceed max int size, please use array length under 11\n");
     }
 
     stress_test(N);
@@ -105,8 +105,8 @@ int main(int argc, char **argv ){
     int * arr = malloc(n*sizeof(int));
     int digit = 0;
     for (int i = 0; i < n; i++){
-      if (strlen(argv[i+2]) > 9 || digit > 18){
-        printf("Exceed max data size, please shorten the number at %dth element or decrease total digit count of array under 19\n", i-2);
+      if (strlen(argv[i+2]) > 10 || digit > 10){
+        printf("Exceed max int size, please shorten the number at %dth element or decrease total digit count of array under 10\n", i-2);
         free(arr);
         return 0;
       }
