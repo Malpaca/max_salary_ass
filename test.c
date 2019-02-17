@@ -94,24 +94,24 @@ int main(int argc, char **argv ){
   if (mode == 1){
     int N = atoi(argv[2]);
     if (N > 18){
-      printf("This exceed max data size, please use array length under 19");
+      printf("This exceed max data size, please use array length under 19\n");
     }
 
     stress_test(N);
     return 0;
   }
   else if (mode == 2){
-    int N = argc - 2;
-    int * arr = malloc(N*sizeof(int));
-    for (int i = 2; i < argc; i++){
-      if (strlen(argv[i]) > 9){
-        printf("Exceed max data size, please shorten the number at %dth element", i-2);
+    int n = argc - 2;
+    int * arr = malloc(n*sizeof(int));
+    for (int i = 0; i < n; i++){
+      if (strlen(argv[i+2]) > 9){
+        printf("Exceed max data size, please shorten the number at %dth element\n", i-2);
         free(arr);
         return 0;
       }
-      arr[i] = atoi(argv[i]);
+      arr[i] = atoi(argv[i+2]);
     }
-    short_test(arr, N);
+    short_test(arr, n);
     return 0;
   }
   // else if (mode == 2){
