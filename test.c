@@ -110,7 +110,7 @@ int main(int argc, char **argv ){
         free(arr);
         return 0;
       }
-      digit += strlen(argv[i+2];
+      digit += strlen(argv[i+2]);
       arr[i] = atoi(argv[i+2]);
     }
     short_test(arr, n);
