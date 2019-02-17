@@ -114,14 +114,6 @@ int main(int argc, char **argv ){
     short_test(arr, n);
     return 0;
   }
-  // else if (mode == 2){
-  //   if (argc < 3){
-  //     printf("To run: test <3> <number of iteration per N>\n");
-  //     return 0;
-  //   }
-  //   int iteration = atoi(argv[2]);
-  //   // performance_test(iteration);
-  // }
 
   return 0;
 }
