@@ -103,15 +103,18 @@ int main(int argc, char **argv ){
   else if (mode == 2){
     int n = argc - 2;
     int * arr = malloc(n*sizeof(int));
+    int digit = 0;
     for (int i = 0; i < n; i++){
-      if (strlen(argv[i+2]) > 9){
-        printf("Exceed max data size, please shorten the number at %dth element\n", i-2);
+      if (strlen(argv[i+2]) > 9 || digit > 18){
+        printf("Exceed max data size, please shorten the number at %dth element or decrease total digit count of array under 19\n", i-2);
         free(arr);
         return 0;
       }
+      digit += strlen(argv[i+2];
       arr[i] = atoi(argv[i+2]);
     }
     short_test(arr, n);
+    free(arr);
     return 0;
   }
 
