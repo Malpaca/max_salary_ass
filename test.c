@@ -105,12 +105,12 @@ int main(int argc, char **argv ){
     int * arr = malloc(n*sizeof(int));
     int digit = 0;
     for (int i = 0; i < n; i++){
-      if (strlen(argv[i+2]) > 10 || digit > 10){
-        printf("Exceed max int size, please shorten the number at %dth element or decrease total digit count of array under 10\n", i-2);
+      digit += strlen(argv[i+2]);
+      if (strlen(argv[i+2]) > 9 || digit > 9){
+        printf("Exceed max int size, please decrease total digit count of array under 10\n");
         free(arr);
         return 0;
       }
-      digit += strlen(argv[i+2]);
       arr[i] = atoi(argv[i+2]);
     }
     short_test(arr, n);
