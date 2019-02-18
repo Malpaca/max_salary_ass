@@ -117,6 +117,10 @@ int main(int argc, char **argv ){
     free(arr);
     return 0;
   }
+  else{
+    printf("To run: test <1> <array seperated by space>\n or test <2> <Number of element in array>\n");
+    return 0;
+  }
 
   return 0;
 }
