@@ -8,7 +8,7 @@ int concatenate(int a, int b) {
 }
 
 int is_better (const void * a, const void * b) {
-   return concatenate(*(int*)a,*(int*)b) < concatenate(*(int*)b,*(int*)a);
+   return concatenate(*(int*)b,*(int*)a) - concatenate(*(int*)a,*(int*)b);
 }
 
 // Generating permutation using Heap Algorithm
