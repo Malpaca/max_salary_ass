@@ -8,13 +8,13 @@ void print_array(int *arr, int size){
 }
 
 // Generating permutation using Heap Algorithm
-void max_salary_naive(int a[], int size, int n, int * max)
+void max_salary_naive(int a[], int size, int n, unsigned long long * max)
 {
     // if size becomes 1 then do something with the obtained permutation
     if (size == 1)
     {
         //TO DO - instead of printing, insert your code for evaluating the next candidate array
-        int salary = a[0];
+        unsigned long long salary = (unsigned long long)a[0];
         for (int i = 1; i < n; i++){
           salary = concatenate(salary,a[i]);
         }

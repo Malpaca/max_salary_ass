@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+#include <limits.h>
 #include "max_salary.h"
 
 void print_progress(size_t current, size_t user_min, size_t user_max){
@@ -30,8 +31,7 @@ void print_progress(size_t current, size_t user_min, size_t user_max){
 
 int power(int size){
   int base = 1;
-  int word_length = 9/size;
-  for (int i = 0; i < word_length; i++){
+  for (int i = 0; i < size; i++){
     base *=10;
   }
   return base;
@@ -44,21 +44,28 @@ void stress_test(int N){
     int n = rand() % N + 1; // generate number between 1 to N
 
 	  int *arr = malloc(n*sizeof(int));
+    int m = 19;
     for (int i=0; i<n; i++){
-      arr[i] = rand() % power(n);
+      int digit = rand() % m + 1;
+      m -= digit;
+      arr[i] = rand() % power(digit);
+      if (m <= 0){
+        n = i+1;
+        break;
+      }
     }
 
     printf("array is:");
     print_array(arr, n);
 
-    int result1 = 0;
+    unsigned long long int result1 = 0;
     max_salary_naive(arr, n, n, &result1);
-    int result2 = max_salary_greedy(arr, n);
+    unsigned long long int result2 = max_salary_greedy(arr, n);
 
     if (result1==result2)
-      printf("OK:%d\n",result2);
+      printf("Max salary: %llu\n",result2);
     else {
-      printf("Wrong answer: correct=%d, got instead=%d\n", result1, result2);
+      printf("Wrong answer: correct=%llu, got instead=%llu\n", result1, result2);
       free(arr);
 	    exit(0);
 	  }
@@ -70,14 +77,14 @@ void short_test(int * arr, int n){
   printf("array is:");
   print_array(arr, n);
 
-  int result1 = 0;
+  unsigned long long int result1 = 0;
   max_salary_naive(arr, n, n, &result1);
-  int result2 = max_salary_greedy(arr, n);
+  unsigned long long int result2 = max_salary_greedy(arr, n);
 
   if (result1==result2)
-    printf("OK:%d\n",result2);
+    printf("Max salary: %llu\n",result2);
   else {
-    printf("Wrong answer: correct=%d, got instead=%d\n", result1, result2);
+    printf("Wrong answer: correct=%llu, got instead=%llu\n", result1, result2);
     exit(0);
   }
 
@@ -93,8 +100,8 @@ int main(int argc, char **argv ){
 
   if (mode == 1){
     int N = atoi(argv[2]);
-    if (N > 10){
-      printf("This exceed max int size, please use array length under 11\n");
+    if (N > 19){
+      printf("This exceed max  size, please use array length under 20\n");
     }
 
     stress_test(N);
@@ -106,8 +113,8 @@ int main(int argc, char **argv ){
     int digit = 0;
     for (int i = 0; i < n; i++){
       digit += strlen(argv[i+2]);
-      if (strlen(argv[i+2]) > 9 || digit > 9){
-        printf("Exceed max int size, please decrease total digit count of array under 10\n");
+      if (strlen(argv[i+2]) > 9 || digit > 19){
+        printf("Exceed max int size, input should be int array, total digit should be less than 20\n");
         free(arr);
         return 0;
       }

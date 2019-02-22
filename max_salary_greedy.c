@@ -1,20 +1,26 @@
 #include "max_salary.h"
 
-int concatenate(int a, int b) {
-    int pow = 10;
-    while(b >= pow)
-        pow *= 10;
+unsigned long long int concatenate(unsigned long long int a, unsigned long long int b) {
+    unsigned long long int pow = 10;
+    while(b >= pow) pow *= 10;
+    // printf("%llu, %llu, %llu\n",a,b, pow);
+    // printf("%llu\n", a*pow + b);
     return a*pow + b;
 }
 
 int is_better (const void * a, const void * b) {
-   return concatenate(*(int*)b,*(int*)a) - concatenate(*(int*)a,*(int*)b);
+  unsigned long long int first = concatenate((unsigned long long int)*(int*)b,(unsigned long long int)*(int*)a);
+  unsigned long long int second = concatenate((unsigned long long int)*(int*)a,(unsigned long long int)*(int*)b);
+  if (first > second) return 1;
+  else if (second > first) return -1;
+  else return 0;
 }
 
 // Generating permutation using Heap Algorithm
-int max_salary_greedy(int a[], int n){
+unsigned long long int max_salary_greedy(int a[], int n){
   qsort(a, n, sizeof(int), is_better);
-  int salary = a[0];
+  unsigned long long int salary = a[0];
+  // printf("start conbining\n");
   for (int i = 1; i < n; i++){
     salary = concatenate(salary,a[i]);
   }
