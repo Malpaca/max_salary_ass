@@ -92,7 +92,7 @@ void short_test(int * arr, int n){
 
 int main(int argc, char **argv ){
   if (argc < 3){
-    printf("To run: test <1> <array seperated by space>\n or test <2> <Number of element in array>\n");
+    printf("To run: test <1> <Number of element in array>\n or test <2> <array seperated by space>\n");
     return 0;
   }
 
